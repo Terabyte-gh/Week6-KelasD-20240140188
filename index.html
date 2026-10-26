@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Tugas Week 6: Fetch API, DOM, dan Event Handling." />
+  <meta name="theme-color" content="#071a55" />
+  <title>Week 6 | S.E.E.S. Web Terminal</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="script.js" defer></script>
+</head>
+<body class="persona-theme">
+  <div class="ui-transition" aria-hidden="true"></div>
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a class="brand" href="#beranda" aria-label="Week 6, beranda">
+        <span class="brand-mark">P3</span>
+        <span>S.E.E.S. <span class="brand-muted">// WEB LAB</span></span>
+      </a>
+      <nav aria-label="Navigasi utama">
+        <a href="#produk"><span>01</span> Data Archive</a>
+        <a href="#formulir"><span>02</span> Social Link</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="beranda">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow"><span class="eyebrow-dot"></span> THE DARK HOUR </p>
+          <h1>Data awakens.<br /><span>Choose your action.</span></h1>
+          <p class="hero-description">Sebuah terminal bergaya Persona 3 untuk menjelajahi data produk dan membangun Social Link lewat form interaktif berbasis DOM.</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#produk">Masuk ke data <span aria-hidden="true">↘</span></a>
+            <a class="text-link" href="#formulir">Buka Social Link <span aria-hidden="true">↗</span></a>
+          </div>
+        </div>
+        <div class="hero-panel" aria-label="Teknologi yang digunakan">
+          <div class="panel-topline"><span class="live-dot"></span> S.E.E.S. NETWORK // ONLINE</div>
+          <div class="code-line"><span class="code-purple">const</span> data = <span class="code-yellow">await</span> fetch(url);</div>
+          <div class="code-line"><span class="code-purple">const</span> products = <span class="code-yellow">await</span> data.<span class="code-blue">json</span>();</div>
+          <div class="code-line code-comment">// synchronize the archive</div>
+          <div class="code-line">products.<span class="code-blue">forEach</span>(renderProduct);</div>
+          <div class="panel-divider"></div>
+          <div class="tech-tags"><span>FETCH API</span><span>DOM</span><span>EVENT LISTENER</span></div>
+          <div class="panel-bottom"><span>HTML · CSS · JAVASCRIPT</span><span class="panel-version">DAY 06</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-products" id="produk">
+      <div class="container">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">01 / FETCH API · DATA ARCHIVE</p>
+            <h2>Item archive<span class="heading-period">.</span></h2>
+          </div>
+          <button id="reloadProducts" class="button button-outline" type="button"><span aria-hidden="true">↻</span> Muat ulang</button>
+        </div>
+
+        <div class="product-toolbar">
+          <label class="search-box" for="productSearch">
+            <span aria-hidden="true" class="search-icon">⌕</span>
+            <input id="productSearch" type="search" placeholder="Cari nama produk..." autocomplete="off" />
+          </label>
+          <p id="productCount" class="product-count">Menyiapkan data produk...</p>
+        </div>
+
+        <p id="productStatus" class="status-message" role="status" aria-live="polite">Sedang mengambil data produk dari API...</p>
+        <div id="productGrid" class="product-grid" aria-busy="true"></div>
+        <div id="productError" class="error-panel" hidden>
+          <div class="error-icon" aria-hidden="true">!</div>
+          <div>
+            <h3>Data belum bisa dimuat</h3>
+            <p>Periksa koneksi internet, lalu coba muat ulang data produk.</p>
+          </div>
+          <button id="retryProducts" class="button button-primary" type="button">Coba lagi</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-form" id="formulir">
+      <div class="container form-layout">
+        <div class="form-intro">
+          <p class="eyebrow">02 / DOM & EVENT HANDLING</p>
+          <h2>Build a<br /><span>Social Link.</span></h2>
+          <p class="section-description">Registrasikan anggota baru, validasi input, dan lihat hasil interaksi langsung tanpa meninggalkan terminal.</p>
+          <div class="feature-list">
+            <div class="feature-item"><span class="feature-number">01</span><div><strong>Ambil nilai input</strong><p>Membaca input menggunakan DOM.</p></div></div>
+            <div class="feature-item"><span class="feature-number">02</span><div><strong>Validasi sederhana</strong><p>Memeriksa nama, email, dan pilihan sesi.</p></div></div>
+            <div class="feature-item"><span class="feature-number">03</span><div><strong>Feedback dinamis</strong><p>Menampilkan hasil setelah form dikirim.</p></div></div>
+          </div>
+        </div>
+
+        <div class="form-card">
+          <div class="form-card-heading">
+            <div><p class="form-kicker">S.E.E.S. ENTRY // NEW MEMBER</p><h3>Data anggota</h3></div>
+            <span class="form-step">ENTRY 01</span>
+          </div>
+          <form id="registrationForm" novalidate>
+            <div class="field-group">
+              <label for="fullName">Nama lengkap <span class="required-mark">*</span></label>
+              <input id="fullName" name="fullName" type="text" placeholder="Contoh: Syah Jehan" autocomplete="name" minlength="3" maxlength="60" required aria-describedby="nameHint" />
+              <small id="nameHint" class="field-hint">Minimal 3 karakter.</small>
+            </div>
+            <div class="field-group">
+              <label for="email">Email <span class="required-mark">*</span></label>
+              <input id="email" name="email" type="email" placeholder="nama@email.com" autocomplete="email" maxlength="100" required />
+            </div>
+            <div class="field-group">
+              <label for="studySession">Sesi pilihan <span class="required-mark">*</span></label>
+              <select id="studySession" name="studySession" required>
+                <option value="">Pilih sesi kegiatan</option>
+                <option value="JavaScript Dasar">JavaScript Dasar</option>
+                <option value="Fetch API">Fetch API</option>
+                <option value="DOM & Event Handling">DOM & Event Handling</option>
+              </select>
+            </div>
+            <div class="field-group">
+              <label for="reason">Alasan bergabung <span class="optional-label">Opsional</span></label>
+              <textarea id="reason" name="reason" rows="3" maxlength="200" placeholder="Catatan untuk tim S.E.E.S."></textarea>
+              <div class="textarea-footer"><small>Boleh dikosongkan.</small><small id="reasonCount">0/200</small></div>
+            </div>
+            <button class="button button-primary button-submit" type="submit">Konfirmasi pendaftaran <span aria-hidden="true">↗</span></button>
+            <p class="form-required-note"><span class="required-mark">*</span> Wajib diisi. Data hanya diproses di browser, tidak dikirim ke server.</p>
+            <p id="formFeedback" class="form-feedback" role="status" aria-live="polite" hidden></p>
+          </form>
+          <div id="submissionResult" class="submission-result" hidden aria-live="polite">
+            <div class="result-check" aria-hidden="true">✓</div>
+            <div><p class="result-kicker">PENDAFTARAN DIPROSES</p><h4 id="resultName"></h4><p id="resultDetails"></p><p id="resultReason" class="result-reason"></p></div>
+            <button id="resetForm" type="button" class="text-button">Isi ulang form ↻</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <a class="brand footer-brand" href="#beranda"><span class="brand-mark">P3</span><span>S.E.E.S. <span class="brand-muted">// WEB LAB</span></span></a>
+      <p>THE DARK HOUR · FETCH API · DOM</p>
+      <a href="#beranda" class="back-top">Kembali ke atas ↑</a>
+    </div>
+  </footer>
+</body>
+</html>
